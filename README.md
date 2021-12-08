@@ -1,5 +1,7 @@
 # Tagteam
 
+[![Version](https://img.shields.io/npm/v/reveal.js-tagteam)](#)
+
 A plugin for [Reveal.js](https://revealjs.com) which is used to dynamically show only certain sections in presentations when you don't want to show everything. It uses URL parameters to set the needed sections.
 
 [![Screenshot](screenshot.png)](https://martinomagnifico.github.io/reveal.js-tagteam/demo.html)
