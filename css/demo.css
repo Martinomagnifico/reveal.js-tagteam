@@ -1,0 +1,61 @@
+.slides {
+  opacity: 0;
+  -webkit-transition: opacity .5s ease;
+  -o-transition: opacity .5s ease;
+  transition: opacity .5s ease; }
+
+.reveal.ready .slides {
+  opacity: 1; }
+
+.backgrounds {
+  background: #1a1626; }
+
+.reveal code {
+  line-height: 1.5;
+  font-size: .66em; }
+
+.reveal pre, code {
+  background: #222D2F;
+  color: #ddd;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem; }
+
+.reveal .hljs {
+  background: #222D2F; }
+
+code {
+  background: #2c3235;
+  background: #222D2F;
+  color: #ddd;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem; }
+
+.reveal pre code {
+  max-height: 480px; }
+
+code.url {
+  background: #ddd;
+  color: #222D2F; }
+
+code.half {
+  color: rgba(255, 255, 255, 0.3); }
+
+hr {
+  width: 50%; }
+
+.small {
+  font-size: .66em; }
+
+a.github-corner {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: clamp(50px, 8vmax, 80px);
+  line-height: 0;
+  color: rgba(255, 255, 255, 0.5); }
+  a.github-corner.bottom {
+    top: auto;
+    bottom: 3px; }
+
+a.github-corner:hover {
+  color: white; }

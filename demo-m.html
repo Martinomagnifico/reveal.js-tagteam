@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tagteam for Reveal.js, mandatorygroup demo</title>
+    <meta name="description" content="">
+    <meta name="author" content="Martinomagnifico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../dist/theme/black.css">
+    <link rel="stylesheet" href="css/demo.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-name="Title" data-tag="keep">
+                <h1>Tagteam</h1>
+                <h3>for Reveal.js</h3>
+                <hr>
+                <p class="small"><code>mandatorygroup</code> demo</p><code class="url" id="exampleParameter">.../demo.html?t=tagteam</code>
+            </section>
+            <section data-name="Brown" data-tag="nice" data-visibility="hidden">
+                <section data-tag="cats, small">Cat (brown, small, nice)</section>
+                <section data-tag="dogs">Dog (brown, nice)</section>
+                <section data-tag="dogs, big">Dog (brown, big, nice)</section>
+                <section data-tag="horses">Horse (brown, nice)</section>
+            </section>
+            <section data-name="Black &amp; white" data-visibility="hidden">
+                <section data-tag="cats">Cat (black &amp; white)</section>
+                <section data-tag="dogs, small">Dog (black &amp; white, small)</section>
+                <section data-tag="horses">Horse (black &amp; white)</section>
+            </section>
+            <section data-mandatory>There is no correct URL parameter set</section>
+        </div>
+    </div>
+    <script src="../dist/reveal.js"></script>
+    <script src="plugin/tagteam/tagteam.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            transition: "convex",
+            history: true,
+            tagteam: {
+                groups: {
+                    sbwd: {
+                        names: [
+                            "black & white"
+                        ],
+                        tags: [
+                            [
+                                "dogs",
+                                "small"
+                            ]
+                        ]
+                    },
+                    brownpets: {
+                        names: [
+                            "brown"
+                        ],
+                        tags: [
+                            "cats",
+                            "dogs"
+                        ]
+                    }
+                },
+                mandatorygroup: true
+            },
+            plugins: [
+                Tagteam,
+                Simplemenu,
+                RevealHighlight
+            ]
+        });
+    </script>
+    <script>
+        var changeParamExample = function changeParamExample(thisDeck) {
+            var theDeck = thisDeck.getRevealElement();
+            var paramExample = theDeck.querySelector('#exampleParameter');
+            if (paramExample) {
+                var url = new URL(window.location);
+                var urlparams = new URLSearchParams(url.search);
+                var t = urlparams.get('t');
+                var n = urlparams.get('n');
+                var g = urlparams.get('g');
+                if (t || n || g) {
+                    paramExample.innerHTML = ".../demo.html" + url.search;
+                } else {
+                    paramExample.innerHTML = ".../demo.html?t=tagteam";
+                }
+            }
+        };
+        Reveal.addEventListener('ready', changeParamExample(Reveal));
+    </script>
+</body>
+
+</html>
