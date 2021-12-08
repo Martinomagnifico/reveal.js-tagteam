@@ -2,7 +2,7 @@
 
 A plugin for [Reveal.js](https://revealjs.com) which is used to dynamically show only certain sections in presentations when you don't want to show everything. It uses URL parameters to set the needed sections.
 
-[![Screenshot](screenshot.png)](https://martinomagnifico.github.io/reveal.js-copycode/demo.html)
+[![Screenshot](screenshot.png)](https://martinomagnifico.github.io/reveal.js-tagteam/demo.html)
 
 An option to use groups is also provided. Also, the need to enter a group can be set, to avoid the possibility to view all slides (no parameters at all). This is just a simple safeguard. Anyone with a bit of HTML knowledge can find the valid group names. 
 
