@@ -1,6 +1,6 @@
 # Tagteam
 
-[![Version](https://img.shields.io/npm/v/reveal.js-tagteam)](#)
+[![Version](https://img.shields.io/npm/v/reveal.js-tagteam)](#) [![Downloads](https://img.shields.io/npm/dt/reveal.js-tagteam)](https://github.com/Martinomagnifico/reveal.js-tagteam/archive/refs/heads/master.zip)
 
 A plugin for [Reveal.js](https://revealjs.com) which is used to dynamically show only certain sections in presentations when you don't want to show everything. It uses URL parameters to set the needed sections.
 
@@ -213,4 +213,16 @@ Reveal.initialize({
 * **`mandatorygroup`**: This option can set the mandatory use of groups.
 * **`groups`**: This contains a standard placeholder for predefined groups.
 
+
+
+## Like it?
+If you like it, please star this repo! 
+
+And if you want to show off what you made with it, please do :-)
+
+
+## License
+MIT licensed
+
+Copyright (C) 2021 Martijn De Jongh (Martino)
 
