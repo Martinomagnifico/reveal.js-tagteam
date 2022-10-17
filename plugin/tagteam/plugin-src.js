@@ -163,11 +163,16 @@ const Plugin = () => {
 					if (namedSection.dataset.visibility != "hidden") {
 
 						let parentVisible = false;
-						namedSection.children.forEach(child => {
-							if (child.dataset.visibility != "hidden") {
-								parentVisible = true;
-							}
-						});
+
+						if (namedSection.hasChildNodes()) {
+
+							[].forEach.call(namedSection.children, function(child) {
+								if (child.dataset.visibility != "hidden") {
+									parentVisible = true;
+								}
+							});
+						}
+
 						if (parentVisible != true) {
 							hideElement(namedSection)
 						}

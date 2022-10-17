@@ -4,7 +4,7 @@
  * https://github.com/Martinomagnifico
  *
  * Tagteam.js for Reveal.js 
- * Version 1.0.0
+ * Version 1.0.1
  * 
  * @license 
  * MIT licensed
@@ -17,8 +17,8 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.Tagteam = factory());
-}(this, (function () { 'use strict';
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Tagteam = factory());
+})(this, (function () { 'use strict';
 
 	var Plugin = function Plugin() {
 	  var tagteam = function tagteam(deck, options) {
@@ -179,11 +179,14 @@
 	        namedSections.forEach(function (namedSection) {
 	          if (namedSection.dataset.visibility != "hidden") {
 	            var parentVisible = false;
-	            namedSection.children.forEach(function (child) {
-	              if (child.dataset.visibility != "hidden") {
-	                parentVisible = true;
-	              }
-	            });
+
+	            if (namedSection.hasChildNodes()) {
+	              [].forEach.call(namedSection.children, function (child) {
+	                if (child.dataset.visibility != "hidden") {
+	                  parentVisible = true;
+	                }
+	              });
+	            }
 
 	            if (parentVisible != true) {
 	              hideElement(namedSection);
@@ -229,4 +232,4 @@
 
 	return Plugin;
 
-})));
+}));

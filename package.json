@@ -1,6 +1,6 @@
 {
     "name": "reveal.js-tagteam",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A plugin for Reveal.js 4 that is used to dynamically show only certain sections in presentations when you don't want to show everything. It uses URL parameters to set the needed sections.",
     "keywords": "reveal, reveal.js, reveal-plugin, plugin, hide, hidden, portfolio",
     "homepage": "https://github.com/Martinomagnifico/reveal.js-tagteam",
@@ -8,9 +8,9 @@
         "type": "git",
         "url": "https://github.com/Martinomagnifico/reveal.js-tagteam.git"
     },
+    "author": "Martijn De Jongh",
+    "license": "MIT, Copyright (C) 2022 Martijn De Jongh",
     "peerDependencies": {
         "reveal.js": "^4.2"
-    },
-    "author": "Martijn De Jongh",
-    "license": "MIT, Copyright (C) 2021 Martijn De Jongh"
+    }
 }
