@@ -1,0 +1,80 @@
+extends templates/layouts/_reveal.pug
+
+append variables
+	- presentation.title = presentation.title
+
+block slides
+	include slides/_slides
+
+block beforeslides
+	+badge(plugin.name.toLowerCase(), 'bottom')
+
+block append scripts
+	+revealsrc("script", "dist/plugin/highlight.js")
+
+	//- Simplemenu is optional here. It draws the menubar, and because Tagteam runs
+	//- first, the chapters it hides never reach the menu.
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/simplemenu/simplemenu.js`)
+	else
+		script(src=`node_modules/reveal.js-simplemenu/plugin/simplemenu/simplemenu.js`)
+
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/${plugin.name}/${plugin.name}.js`)
+		script.
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				//- Tagteam before Simplemenu: Simplemenu builds its map during its own
+				//- init, and skips what is already marked hidden.
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					groups: {
+						bwhsd: {
+							names: ["black & white"],
+							tags: ["horses", ["dogs", "small"]]
+						},
+						brownpets: {
+							names: ["brown"],
+							tags: ["cats", "dogs"]
+						}
+					}
+				}
+			});
+	else
+		script(type="module").
+			import Tagteam from '@/plugin/js/index';
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					debug: true,
+					groups: {
+						bwhsd: {
+							names: ["black & white"],
+							tags: ["horses", ["dogs", "small"]]
+						},
+						brownpets: {
+							names: ["brown"],
+							tags: ["cats", "dogs"]
+						}
+					}
+				}
+			});
+
+	//- Demo chrome: echo the parameters back on the title slide, so the URL that
+	//- produced what you are looking at is on the slide itself.
+	script.
+		(() => {
+			const example = document.querySelector("#exampleParameter");
+			if (!example) return;
+			const search = window.location.search;
+			example.textContent = search ? `.../demo.html${search}` : ".../demo.html?t=tagteam";
+		})();

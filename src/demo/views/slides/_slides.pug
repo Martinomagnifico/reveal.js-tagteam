@@ -1,0 +1,261 @@
+section.center(data-tag="keep", data-state="hide-menubar")
+	h1 Tagteam
+	h3 for Reveal.js
+	hr
+	code.url#exampleParameter .../demo.html?t=tagteam
+
+section(data-name="What is it", data-tag="intro")
+
+	section.center
+		h2 What is it?
+
+	section.center
+		p Tagteam is used to dynamically show only certain sections in presentations when you don’t want to show everything. It uses URL parameters to do that.
+
+		p.small The bar along the top is #[a(href="https://github.com/martinomagnifico/reveal.js-simplemenu", target="_blank") Simplemenu], loaded here on purpose: it is the quickest way to see a chapter added or removed.
+
+	section.center
+		p With Tagteam you can: 
+		ul
+			li Show only sections with certain tags
+			li Show only sections with certain names
+			li Show predefined groups of sections
+			li Hide a set of sections until the URL asks for them
+			li Reveal a hidden section without touching the rest
+			li Combine these methods for flexible control
+
+	section.center
+		p Tagteam reads 3 different URL parameters:
+		ol
+			li #[code ?t=abcd] for #[code data-tag] sections
+			li #[code ?n=abcd] for #[code data-name] sections
+			li #[code ?g=abcd] for predefined groups
+
+	section.center
+		p Tagteam only looks at the sections you have marked. One with neither a #[code data-tag] nor a #[code data-name] is left alone.
+		p.small When a parameter filters, the marked sections it does not name are hidden. With no parameter at all nothing is filtered, so the deck you wrote is the deck you get.
+
+	section.center
+		p Sections you list in #[code hide] work the other way round.
+		p.small An ordinary tagged section is already hidden by a parameter that does not name it. #[code hide] changes two things: it starts hidden even with #[em no] parameter at all, and naming it does not filter the rest of the deck the way naming an ordinary tag would.
+		p.small In #[code "unhide"] mode neither is special. Nothing filters there to begin with, so this is simply how the mode works.
+
+	section.center
+		h4 Two ways to use it
+		//- Row and column headers are marked up as such, so that a screen reader
+		//- reading one cell can say which row it is in. Without that, the second
+		//- column is announced on its own and means nothing.
+		table.threeways
+			thead
+				tr
+					th(scope="col") #[code mode]
+					th(scope="col") What a URL parameter does
+			tbody
+				tr
+					th(scope="row") #[code "select"]
+					td Picks what is shown, and hides every other marked section
+				tr
+					th(scope="row") #[code "unhide"]
+					td Shows what it names, and leaves everything else alone
+		p.small #[code "select"] is the default. With no parameter at all neither mode filters anything, so the deck is what you wrote, less whatever it holds out.
+
+	section.center
+		h4 Always shown
+		p.small A section with #[code data-tag="keep"], like the title slide of this presentation, is left out of both filters and is always shown, except when a group is mandatory.
+		p.small It only matters in #[code "select"] mode, and only for a section that also has a #[code data-tag] or a #[code data-name]. An unmarked section is already always shown, and in #[code "unhide"] mode no parameter ever hides an ordinary marked one.
+		p.small #[code keep] has to be the whole attribute value. #[code data-tag="keep, intro"] is an ordinary tagged section, and is filtered like any other.
+
+
+
+section(data-name="Setup", data-tag="intro")
+
+	section.center
+		h2 Setup
+
+	section
+		p Set up your HTML with data-tags and/or data-names:
+		pre
+			code.hljs.html(data-trim, data-line-numbers).
+				&lt;section data-name="Brown" data-tag="nice"&gt;
+				    &lt;section data-tag="cats, small"&gt;Cat (brown, small, nice)&lt;/section&gt;
+				    &lt;section data-tag="dogs"&gt;Dog (brown, nice)&lt;/section&gt;
+				    &lt;section data-tag="dogs, big"&gt;Dog (brown, big, nice)&lt;/section&gt;
+				    &lt;section data-tag="horses"&gt;Horse (brown, nice)&lt;/section&gt;
+				&lt;/section&gt;
+				&lt;section data-name="Black &amp;amp; white"&gt;
+				    &lt;section data-tag="cats"&gt;Cat (black &amp;amp; white)&lt;/section&gt;
+				    &lt;section data-tag="dogs, small"&gt;Dog (black &amp;amp; white, small)&lt;/section&gt;
+				    &lt;section data-tag="horses"&gt;Horse (black &amp;amp; white)&lt;/section&gt;
+				&lt;/section&gt;
+		//-
+		p.small The above markup is used in all following examples.
+		p.small Note: #[code data-tag] can hold several comma-separated tags. #[code data-name] holds a single name, which may be several words long.
+
+	section
+		h4 JavaScript
+		p.small Load the script and make a reference to it in the Reveal plugin options.
+		pre
+			code.hljs.html(data-line-numbers).
+				&lt;script src="plugin/tagteam/tagteam.js"&gt;&lt;/script&gt;
+				&lt;script&gt;
+				    Reveal.initialize({
+				        plugins: [ Tagteam ]
+				    });
+				&lt;/script&gt;
+		//-
+		p.small When using the Markdown plugin as well, load it first, so Tagteam can find the tagged or named sections it writes.
+
+	section
+		h4 Choose a mode
+		p.small #[code mode] says how the deck behaves. This demo does not set it, so Tags, Names and Groups below all run on the default, #[code "select"]: a parameter picks what is shown and hides every other marked section.
+		pre
+			code.hljs.js(data-line-numbers="4").
+				Reveal.initialize({
+				    //...
+				    tagteam: {
+				        mode: "select"
+				    },
+				    plugins: [ Tagteam ]
+				});
+		//-
+		p.small #[code "unhide"] is the other mode: nothing is hidden by a parameter, only shown. See the #[a(href="demo-select.html") select demo] and the #[a(href="demo-unhide.html") unhide demo] for a full deck built around each.
+
+section(data-name="Tags", data-tag="intro")
+
+	section.center
+		h2 Tags
+
+	section.center
+		h4 Using a single #[code t] parameter
+		p.small #[code.url .../demo.html?t=dogs]
+		p.small Test it here now: #[a(href="?t=dogs") demo.html?t=dogs]
+
+	section.center
+		h4 Using multiple #[code t] parameters
+		p.small #[code.url .../demo.html?t=dogs,cats]
+		p.small Test it here now: #[a(href="?t=dogs,cats") demo.html?t=dogs,cats]
+
+	section.center
+		h4 Using more specific #[code t] parameters
+		p.small Use the plus sign to be more specific.#[br]In this case we want all dogs, but only small cats.
+		p.small #[code.url .../demo.html?t=dogs,cats+small]
+		p.small Test it here now: #[a(href="?t=dogs,cats+small") demo.html?t=dogs,cats+small]
+
+	section.center
+		h4 Using more specific #[code t] parameters
+		p.small This works with inherited tags as well: a vertical slide also counts the tags on its stack.
+		p.small #[code.url .../demo.html?t=small+cats,nice+horses]
+		p.small Test it here now: #[a(href="?t=small+cats,nice+horses") demo.html?t=small+cats,nice+horses]
+
+	section.center
+		h4 Tags work the same in both modes
+		p.small Here, in #[code "select"], #[code ?t=dogs] shows the dogs and hides everything else that is tagged.
+		p.small In #[code "unhide"], the same #[code ?t=dogs] would only reveal a #[code dogs] section that #[code hide] had marked. Nothing else would move.
+
+section(data-name="Names", data-tag="intro")
+
+	section.center
+		h2 Names
+		p When ordering your presentation with nested sections, you can specify these to be shown in one fell swoop.
+
+	section.center
+		h4 Using an #[code n] parameter
+		p.small There are two named stacks with vertical slides. Now we only want the first (#[code data-name="Brown"]) stack.
+		p.small #[code.url .../demo.html?n=brown]
+		p.small Test it here now: #[a(href="?n=brown") demo.html?n=brown]
+
+	section.center
+		h4 Using multiple #[code n] parameters
+		p.small #[code.url .../demo.html?n=brown,black+%26+white]
+		p.small Test it here now: #[a(href="?n=brown,black+%26+white") demo.html?n=brown,black+%26+white]
+
+	section.center
+		h4 Combining names and tags
+		p.small Only black &amp; white horses, and small black &amp; white dogs.
+		p.small #[code.url .../demo.html?n=black+%26+white&amp;t=horses,small+dogs]
+		p.small Test it here now: #[a(href="?n=black+%26+white&t=horses,small+dogs") demo.html?n=black+%26+white&amp;t=horses,small+dogs]
+
+	section.center
+		h4 Names work the same in both modes
+		p.small Here, in #[code "select"], #[code ?n=brown] shows that chapter and hides every other chapter that has a name.
+		p.small In #[code "unhide"], the same #[code ?n=brown] would only reveal a chapter named #[code Brown] that #[code hide] had marked. Nothing else would move.
+
+section(data-name="Groups", data-tag="intro")
+
+	section.center
+		h2 Groups
+		p Groups are predefined sets of tags and/or names.
+
+	section
+		h4 Setting a groups option
+		p.small Each group needs a name, and an array of tags and/or an array of names.
+		pre
+			code.hljs.js(data-line-numbers="3-12").
+				Reveal.initialize({
+				    //...
+				    tagteam: {
+				        groups: {
+				            "brownpets": {
+				                names: ["brown"], tags: ["cats", "dogs"]
+				            },
+				            "bwhsd": {
+				                names: ["black &amp; white"], tags: [ "horses", ["dogs", "small"] ]
+				            }
+				        }
+				    },
+				    plugins: [ Tagteam ]
+				});
+		//-
+		p.small Note: in the 2nd group, the tags contain a nested array to be more specific (small dogs only).
+
+	section.center
+		h4 Using a #[code g] parameter
+		p.small #[code.url .../demo.html?g=brownpets]
+		p.small Test it here now: #[a(href="?g=brownpets") demo.html?g=brownpets]
+
+	section
+		h4 Setting the #[code mandatorygroup] option
+		p.small It is possible to make the use of a group mandatory. This way you avoid the possibility for users to see all slides by just not entering any URL parameter.
+		pre
+			code.hljs.js(data-line-numbers="4").
+				Reveal.initialize({
+				    //...
+				    tagteam: {
+				        mandatorygroup: true,
+				        groups: {
+				            "brownpets": {
+				                names: ["brown"], tags: ["cats", "dogs"]
+				            }
+				        }
+				    },
+				    plugins: [ Tagteam ]
+				});
+		//-
+		p.small Note: this is just a simple safeguard. Anyone with a bit of HTML knowledge can find the valid group names.
+
+	section.center
+		h4 Using a correct #[code g] parameter
+		p.small With #[code mandatorygroup: true] and a correct #[code g] parameter, the slides will show.
+		p.small #[code.url .../demo-mandatory.html?g=brownpets]
+		p.small Test it here now: #[a(href="demo-mandatory.html?g=brownpets") demo-mandatory.html?g=brownpets]
+
+	section.center
+		h4 Using an incorrect #[code g] parameter
+		p.small With #[code mandatorygroup: true] and an incorrect #[code g] parameter, the slides will NOT show. Only slides with #[code data-mandatory] will be shown.
+		p.small #[code.url .../demo-mandatory.html?g=pinkpets]
+		p.small Test it here now: #[a(href="demo-mandatory.html?g=pinkpets") demo-mandatory.html?g=pinkpets]
+
+	section.center
+		h4 Groups work the same in both modes
+		p.small A group just resolves into tags and names, so it behaves exactly like they do. Here, in #[code "select"], #[code ?g=brownpets] picks what is shown and hides the rest.
+		p.small In #[code "unhide"], the same group would only reveal whatever of it #[code hide] had marked. Nothing else would move.
+
+include _slides-pets
+
+section(data-mandatory) There is no correct URL parameter set
+
+section.center(data-tag="tagteam", data-state="hide-menubar", data-visibility="hidden")
+	p Thanks for trying out Tagteam!#[br]Star it if you like it :-)
+
+section.center(data-tag="keep", data-state="hide-menubar")
+	p Go #[a(href="demo.html") back to the start]

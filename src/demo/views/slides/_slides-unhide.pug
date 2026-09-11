@@ -1,0 +1,158 @@
+//- A whole deck rather than a page about a feature: an ordinary short talk that
+//- happens to have one optional chapter and one optional slide in it.
+//-
+//- Both are authored `data-visibility="hidden"` in the markup below, and
+//- `mode: "unhide"` in the page config is what lets a URL parameter reveal them
+//- without disturbing anything else. Nothing else in the deck is marked at all.
+
+section.center(data-state="hide-menubar")
+	h1 Coffee
+	h3 a short talk
+	hr
+	code.url#exampleParameter .../demo-unhide.html
+
+section(data-name="The bean")
+
+	section.center
+		h2 The bean
+
+	section.center
+		p Two species do nearly all the work.
+		p.small #[strong Arabica] is sweeter, more acidic, and fussier about where it grows. #[strong Robusta] has more caffeine, more body, and a good deal more bitterness.
+
+	section.center
+		p Altitude does most of the rest.
+		p.small Higher up, the cherry ripens slowly, and the bean ends up denser and more aromatic. This is the whole of what "high grown" means on a bag.
+
+section(data-name="The grind")
+
+	section.center
+		h2 The grind
+
+	section.center
+		p Grind size is a timer.
+		p.small Finer grounds give the water more surface to work on, so everything happens faster. Coarser grounds slow it down. That is the only reason espresso and filter want different grinds.
+
+	section.center
+		p Even is worth more than exact.
+		p.small A grinder that produces one size extracts evenly. One that produces dust and boulders at the same time gives you a cup that is bitter and sour at once.
+
+section(data-name="The brew")
+
+	section.center
+		h2 The brew
+
+	section.center
+		p Four things, and only four.
+		p.small Ratio, grind, temperature, time. Change one and you have changed the cup; change two at once and you will not know which did it.
+
+	section.center
+		p Start at 1:16.
+		p.small Sixty grams of coffee to a litre of water is a sane place to begin. Adjust the grind first, and only then the ratio.
+
+	//- The optional slide. Its chapter is not hidden, so asking for this one
+	//- changes nothing else about the deck.
+	section.center(data-tag="nerdy", data-visibility="hidden")
+		h4 Extraction, in numbers
+		p.small Somewhere between 18% and 22% of the bean will dissolve. Under that and you taste the sour, over it and you taste the ash.
+		p.small A refractometer will tell you where you are. So, eventually, will your tongue.
+
+//- The optional chapter. A tag is what marks it as optional in this mode; the
+//- name is only there so Simplemenu can label it in the menubar.
+section(data-name="The business", data-tag="business", data-visibility="hidden")
+
+	section.center
+		h2 The business
+
+	section.center
+		p Margins are in the milk.
+		p.small The espresso in a flat white costs a fraction of what the cup sells for. Almost everything you earn per cup, you earn after the shot is pulled.
+
+	section.center
+		p Waste is the other half.
+		p.small Beans go stale, milk gets poured away, and the grinder is dialled in on stock you paid for. It is worth measuring all three.
+
+section(data-name="Thanks")
+
+	section.center
+		h2 Thanks
+		p.small Questions, and then the good stuff.
+
+section(data-name="About this demo", data-tag="keep")
+
+	section.center
+		h2 About this demo: “Unhide”
+		p.small This is the #[i #[strong unhide]] demo: a presentation where two sections are marked to be left out, and a URL parameter reveals the ones it names.
+
+		p.small The bar along the top is #[a(href="https://github.com/martinomagnifico/reveal.js-simplemenu", target="_blank") Simplemenu]. Every one of these demos loads it, because it is the quickest way to see which chapters a parameter left standing.
+
+
+	section.center
+		h4 What you have been looking at
+		p.small The talk above is the short version. One chapter (The business) and one slide inside "The brew" are in the source HTML, but are removed once the presentation starts. Luckily, there is a way to get them back if you request them through a URL parameter.
+
+	section
+		h4 The markup
+		p.small #[code data-visibility="hidden"] is the mark, and it is Reveal’s own attribute. The two optional sections have it, the ordinary chapters do not, and that is the whole difference between them. The tag beside it is what a parameter says to ask for it.
+		pre
+			code.hljs.html(data-trim, data-line-numbers="5").
+				&lt;section data-name="The brew"&gt;
+				    ...
+				&lt;/section&gt;
+
+				&lt;section data-name="The business" data-tag="business" data-visibility="hidden"&gt;
+				    ...
+				&lt;/section&gt;
+
+				&lt;section data-name="Thanks"&gt;
+				    ...
+				&lt;/section&gt;
+		//-
+		p.small The names are for #[a(href="https://github.com/martinomagnifico/reveal.js-simplemenu", target="_blank") Simplemenu], which builds the menubar from them. A name is a label and marks nothing, so labelling your chapters does not take them out of the deck.
+
+	section
+		h4 The config
+		p.small One line. #[code mode] says how the deck behaves, and #[code "unhide"] means a parameter can only reveal, never hide.
+		pre
+			code.hljs.js(data-line-numbers="2").
+				tagteam: {
+				    mode: "unhide"
+				}
+		//-
+		p.small So a parameter here only ever reveals. A term that matches nothing changes nothing.
+		p.small The default is #[code "select"], where a parameter picks what is shown and hides every other marked section.
+		p.small Two separate questions: the markup says what starts out, #[code mode] says what a parameter does about it.
+
+	section.center
+		h4 Try it
+		ul
+			li #[a(href="?t=business") ?t=business] — reveals the chapter, and its entry in the menubar
+			li #[a(href="?t=nerdy") ?t=nerdy] — reveals one slide inside "The brew"
+			li #[a(href="?t=business,nerdy") ?t=business,nerdy] — both
+			li #[a(href="?n=the+business") ?n=the business] — by name, because that chapter has one
+			li #[a(href="?t=typo") ?t=typo] — a term that matches nothing reveals nothing, and hides nothing
+			li #[a(href="demo-unhide.html") demo-unhide.html] — back to the short version
+
+	section
+		h4 A group
+		p.small A group is a set of tags and/or names under one word, so one short link can ask for several things at once:
+		pre
+			code.hljs.js(data-line-numbers="3-5").
+				tagteam: {
+				    mode: "unhide",
+				    groups: {
+				        full: {
+				            tags: ["business", "nerdy"]
+				        }
+				    }
+				}
+		//-
+		p.small #[a(href="?g=full") ?g=full] brings back the chapter and the extra slide together.
+
+	section.center
+		h4 Select, the other way round
+		p.small Unhiding makes a parameter put things back, and only the extras have to be marked.
+		p.small Selecting is the opposite: the parameter #[em is] the presentation, and everything it should be able to hide has to be marked. See the #[a(href="demo-select.html") select demo].
+
+section.center(data-state="hide-menubar")
+	p Go to the #[a(href="demo.html") main demo]

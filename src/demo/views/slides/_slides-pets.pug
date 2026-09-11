@@ -1,0 +1,19 @@
+//- The filterable part of the deck, shared by both demos.
+//-
+//- Both stacks are authored `data-visibility="hidden"`, so a visitor who arrives
+//- without any parameter sees the documentation and none of the pets. A matching
+//- `?t=`, `?n=` or `?g=` is what opens them again.
+
+section(data-name="Brown", data-tag="nice", data-visibility="hidden")
+	section(data-tag="cats, small") Cat (brown, small, nice)
+	section(data-tag="dogs") Dog (brown, nice)
+	section(data-tag="dogs, big") Dog (brown, big, nice)
+	section(data-tag="horses") Horse (brown, nice)
+
+//- Pug escapes attribute values, so the ampersand is written plain here. Writing
+//- `&amp;` would arrive in the DOM as the five characters "&amp;" and `?n=black+%26+white`
+//- would no longer find this stack.
+section(data-name="Black & white", data-visibility="hidden")
+	section(data-tag="cats") Cat (black &amp; white)
+	section(data-tag="dogs, small") Dog (black &amp; white, small)
+	section(data-tag="horses") Horse (black &amp; white)

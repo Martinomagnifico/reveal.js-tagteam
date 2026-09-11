@@ -1,0 +1,16 @@
+section.center(data-name="Title", data-tag="keep")
+	h1 Tagteam
+	h3 for Reveal.js
+	hr
+	p.small #[code mandatorygroup] demo
+	code.url#exampleParameter .../demo-mandatory.html?g=brownpets
+
+
+include _slides-pets
+
+//- The only slide that survives a missing or unknown group. `data-mandatory`
+//- keeps it out of every filter, and every other pass hides it, so it shows up
+//- exactly when there is nothing else to show.
+section.center(data-mandatory)
+	p There is no correct URL parameter set
+	p.small Try #[a(href="?g=brownpets") ?g=brownpets] or #[a(href="?g=bwhsd") ?g=bwhsd], or go #[a(href="demo.html") back to the demo].

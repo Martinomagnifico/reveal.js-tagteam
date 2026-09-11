@@ -1,0 +1,81 @@
+extends templates/layouts/_reveal.pug
+
+append variables
+	- presentation.title = "Studio - selected work"
+
+block slides
+	include slides/_slides-select
+
+block append styles
+	//- "About this demo" is the last menu item, and is about the demo rather than
+	//- part of it. A thin rule sets it apart from the deck's own chapters. It takes
+	//- the bar's own colour, so it turns around with the bar on a light slide.
+	style.
+		.simplemenu-menu li:last-child::before {
+			content: "";
+			align-self: center;
+			width: 1px;
+			height: 1em;
+			margin: 0 0.5em;
+			background: currentColor;
+			opacity: 0.3;
+		}
+
+block beforeslides
+	+badge(plugin.name.toLowerCase(), 'bottom')
+
+block append scripts
+	+revealsrc("script", "dist/plugin/highlight.js")
+
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/simplemenu/simplemenu.js`)
+	else
+		script(src=`node_modules/reveal.js-simplemenu/plugin/simplemenu/simplemenu.js`)
+
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/${plugin.name}/${plugin.name}.js`)
+		script.
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					groups: {
+						pitch: {
+							tags: ["branding", "web"]
+						}
+					}
+				}
+			});
+	else
+		script(type="module").
+			import Tagteam from '@/plugin/js/index';
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					debug: true,
+					groups: {
+						pitch: {
+							tags: ["branding", "web"]
+						}
+					}
+				}
+			});
+
+	script.
+		(() => {
+			const example = document.querySelector("#exampleParameter");
+			if (!example) return;
+			const search = window.location.search;
+			example.textContent = search
+				? `.../demo-select.html${search}`
+				: ".../demo-select.html";
+		})();

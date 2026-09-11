@@ -1,0 +1,78 @@
+extends templates/layouts/_reveal.pug
+
+append variables
+	- presentation.title = presentation.title + " - mandatorygroup"
+
+block slides
+	include slides/_slides-mandatory
+
+block beforeslides
+	+badge(plugin.name.toLowerCase(), 'bottom')
+
+block append scripts
+	+revealsrc("script", "dist/plugin/highlight.js")
+
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/simplemenu/simplemenu.js`)
+	else
+		script(src=`node_modules/reveal.js-simplemenu/plugin/simplemenu/simplemenu.js`)
+
+	if process.env.NODE_ENV === 'production'
+		script(src=`plugin/${plugin.name}/${plugin.name}.js`)
+		script.
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					mandatorygroup: true,
+					groups: {
+						bwhsd: {
+							names: ["black & white"],
+							tags: [["dogs", "small"]]
+						},
+						brownpets: {
+							names: ["brown"],
+							tags: ["cats", "dogs"]
+						}
+					}
+				}
+			});
+	else
+		script(type="module").
+			import Tagteam from '@/plugin/js/index';
+			Reveal.initialize({
+				transition: "slide",
+				history: true,
+				plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+				simplemenu: {
+					selectby: "data-name"
+				},
+				tagteam: {
+					debug: true,
+					mandatorygroup: true,
+					groups: {
+						bwhsd: {
+							names: ["black & white"],
+							tags: [["dogs", "small"]]
+						},
+						brownpets: {
+							names: ["brown"],
+							tags: ["cats", "dogs"]
+						}
+					}
+				}
+			});
+
+	script.
+		(() => {
+			const example = document.querySelector("#exampleParameter");
+			if (!example) return;
+			const search = window.location.search;
+			example.textContent = search
+				? `.../demo-mandatory.html${search}`
+				: ".../demo-mandatory.html?g=brownpets";
+		})();

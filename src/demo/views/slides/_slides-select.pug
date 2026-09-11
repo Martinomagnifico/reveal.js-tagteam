@@ -1,0 +1,118 @@
+//- The select half of the pair: a portfolio, where the URL parameter decides
+//- which work is shown.
+//-
+//- Every chapter has both a `data-name` and a `data-tag`, because that is
+//- what this way round asks for — a parameter can only choose between sections
+//- it can recognise. The two that must survive every parameter, the title and
+//- "About this demo", have `data-tag="keep"` instead.
+
+section.center(data-tag="keep", data-state="hide-menubar")
+	h1 Studio
+	h3 selected work
+	hr
+	code.url#exampleParameter .../demo-select.html
+
+section(data-name="Identity", data-tag="branding")
+
+	section.center
+		h2 Identity
+
+	section.center
+		p Logo for “Harbour &amp; Fold”
+		p.small A wordmark for a bindery. Drawn from the fold of a signature, which is the one shape every book on their shelves has in common.
+
+	section.center
+		p Logo for “Meridian Coffee”
+		p.small A logo for Meridian Coffee Roasters. The logo is a cup seen from directly above.
+
+section(data-name="Websites", data-tag="web")
+
+	section.center
+		h2 Websites
+
+	section.center
+		p “Harbour &amp; Fold”, online
+		p.small A catalogue of about four hundred bindings, and a search that has to work when you only remember the colour.
+
+	section.center
+		p “Meridian Coffee”, online
+		p.small A shop. Most of the work went into making the subscription page understandable in one screen.
+
+section(data-name="Books", data-tag="print")
+
+	section.center
+		h2 Books
+
+	section.center
+		p “The Fold”, a monograph
+		p.small 240 pages, two colours, sewn. The grid is built on the page proportion rather than on a column count.
+
+section(data-name="Posters", data-tag="print")
+
+	section.center
+		h2 Posters
+
+	section.center
+		p A season of six
+		p.small For a concert hall. One typeface, one rule, and a different colour per month.
+
+section(data-name="About this demo", data-tag="keep")
+
+	section.center
+		h2 About this demo: “Select”
+		p.small This is the #[i #[strong select]] demo: a presentation where a URL parameter picks which chapters or slides are shown, and every other marked section is hidden.
+
+		p.small The bar along the top is #[a(href="https://github.com/martinomagnifico/reveal.js-simplemenu", target="_blank") Simplemenu]. Every one of these demos loads it, because it is the quickest way to see which chapters a parameter left standing.
+
+	section.center
+		h4 What you have been looking at
+		p.small The portfolio above is all of the work, because you arrived without a parameter. Name a tag or a name in the URL and only those chapters are left — every other marked chapter is removed once the presentation starts.
+
+	section
+		h4 The markup
+		p.small Selecting means the parameter picks what is shown. It can only choose between sections it can recognise, so everything it should be able to hide has to be marked. Each chapter here has a name and a tag.
+		pre
+			code.hljs.html(data-trim, data-line-numbers).
+				&lt;section data-name="Identity" data-tag="branding"&gt; ... &lt;/section&gt;
+				&lt;section data-name="Websites" data-tag="web"&gt;     ... &lt;/section&gt;
+				&lt;section data-name="Books"    data-tag="print"&gt;   ... &lt;/section&gt;
+				&lt;section data-name="Posters"  data-tag="print"&gt;   ... &lt;/section&gt;
+		//-
+		p.small The title slide and this chapter have #[code data-tag="keep"] instead, which leaves them out of the filters. They are shown whatever you include.
+
+	section.center
+		h4 The config
+		p.small Nothing. Tags and names are in the markup, and #[code mode] is already #[code "select"] by default, so this deck configures nothing at all.
+		p.small The one thing you would add is a group, which is next.
+
+	section.center
+		h4 Try it
+		ul
+			li #[a(href="?t=web") ?t=web] — the websites only
+			li #[a(href="?t=print") ?t=print] — two chapters share that tag
+			li #[a(href="?t=web,print") ?t=web,print] — either one
+			li #[a(href="?n=identity") ?n=identity] — by name instead
+			li #[a(href="demo-select.html") demo-select.html] — everything again
+
+	section
+		h4 A group
+		p.small A group is a set of tags and/or names under one word, so the link can be short and you can change what it means later.
+		pre
+			code.hljs.js(data-line-numbers="3-5").
+				tagteam: {
+				    groups: {
+				        pitch: {
+				            tags: ["branding", "web"]
+				        }
+				    }
+				}
+		//-
+		p.small #[a(href="?g=pitch") ?g=pitch] shows the identity work and the websites.
+
+	section.center
+		h4 Unhide, the other way round
+		p.small Selecting makes the parameter #[em be] the presentation, so everything it should be able to hide has to be marked.
+		p.small Unhiding is the opposite: only the extras are marked, and a parameter reveals them without touching anything else. See the #[a(href="demo-unhide.html") unhide demo].
+
+section.center(data-tag="keep", data-state="hide-menubar")
+	p Go to the #[a(href="demo.html") main demo]

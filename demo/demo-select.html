@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Studio - selected work</title>
+    <meta name="author" content="Martijn De Jongh (Martino)">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <style>
+      .simplemenu-menu li:last-child::before {
+      	content: "";
+      	align-self: center;
+      	width: 1px;
+      	height: 1em;
+      	margin: 0 0.5em;
+      	background: currentColor;
+      	opacity: 0.3;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="reveal"><a class="github-corner bottom" href="https://github.com/martinomagnifico/reveal.js-tagteam" target="blank" title="View source on GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
+          <path fill="currentColor" d="M27.5 11.2a16.3 16.3 0 0 0-5.1 31.7c.8.2 1.1-.3 1.1-.7v-2.8c-4.5 1-5.5-2.2-5.5-2.2-.7-1.9-1.8-2.4-1.8-2.4-1.5-1 .1-1 .1-1 1.6.1 2.5 1.7 2.5 1.7 1.5 2.5 3.8 1.8 4.7 1.4.2-1 .6-1.8 1-2.2-3.5-.4-7.3-1.8-7.3-8 0-1.8.6-3.3 1.6-4.4-.1-.5-.7-2.1.2-4.4 0 0 1.4-.4 4.5 1.7a15.6 15.6 0 0 1 8.1 0c3.1-2 4.5-1.7 4.5-1.7.9 2.3.3 4 .2 4.4 1 1 1.6 2.6 1.6 4.3 0 6.3-3.8 7.7-7.4 8 .6.6 1.1 1.6 1.1 3v4.6c0 .4.3.9 1.1.7a16.3 16.3 0 0 0-5.2-31.7"></path>
+        </svg></a>
+      <div class="slides">
+        <section class="center" data-tag="keep" data-state="hide-menubar">
+          <h1>Studio</h1>
+          <h3>selected work</h3>
+          <hr><code class="url" id="exampleParameter">.../demo-select.html</code>
+        </section>
+        <section data-name="Identity" data-tag="branding">
+          <section class="center">
+            <h2>Identity</h2>
+          </section>
+          <section class="center">
+            <p>Logo for “Harbour &amp; Fold”</p>
+            <p class="small">A wordmark for a bindery. Drawn from the fold of a signature, which is the one shape every book on their shelves has in common.</p>
+          </section>
+          <section class="center">
+            <p>Logo for “Meridian Coffee”</p>
+            <p class="small">A logo for Meridian Coffee Roasters. The logo is a cup seen from directly above.</p>
+          </section>
+        </section>
+        <section data-name="Websites" data-tag="web">
+          <section class="center">
+            <h2>Websites</h2>
+          </section>
+          <section class="center">
+            <p>“Harbour &amp; Fold”, online</p>
+            <p class="small">A catalogue of about four hundred bindings, and a search that has to work when you only remember the colour.</p>
+          </section>
+          <section class="center">
+            <p>“Meridian Coffee”, online</p>
+            <p class="small">A shop. Most of the work went into making the subscription page understandable in one screen.</p>
+          </section>
+        </section>
+        <section data-name="Books" data-tag="print">
+          <section class="center">
+            <h2>Books</h2>
+          </section>
+          <section class="center">
+            <p>“The Fold”, a monograph</p>
+            <p class="small">240 pages, two colours, sewn. The grid is built on the page proportion rather than on a column count.</p>
+          </section>
+        </section>
+        <section data-name="Posters" data-tag="print">
+          <section class="center">
+            <h2>Posters</h2>
+          </section>
+          <section class="center">
+            <p>A season of six</p>
+            <p class="small">For a concert hall. One typeface, one rule, and a different colour per month.</p>
+          </section>
+        </section>
+        <section data-name="About this demo" data-tag="keep">
+          <section class="center">
+            <h2>About this demo: “Select”</h2>
+            <p class="small">This is the <i><strong>select</strong></i> demo: a presentation where a URL parameter picks which chapters or slides are shown, and every other marked section is hidden.</p>
+            <p class="small">The bar along the top is <a href="https://github.com/martinomagnifico/reveal.js-simplemenu" target="_blank">Simplemenu</a>. Every one of these demos loads it, because it is the quickest way to see which chapters a parameter left standing.</p>
+          </section>
+          <section class="center">
+            <h4>What you have been looking at</h4>
+            <p class="small">The portfolio above is all of the work, because you arrived without a parameter. Name a tag or a name in the URL and only those chapters are left — every other marked chapter is removed once the presentation starts.</p>
+          </section>
+          <section>
+            <h4>The markup</h4>
+            <p class="small">Selecting means the parameter picks what is shown. It can only choose between sections it can recognise, so everything it should be able to hide has to be marked. Each chapter here has a name and a tag.</p>
+            <pre><code class="hljs html" data-trim data-line-numbers>&lt;section data-name="Identity" data-tag="branding"&gt; ... &lt;/section&gt;
+&lt;section data-name="Websites" data-tag="web"&gt;     ... &lt;/section&gt;
+&lt;section data-name="Books"    data-tag="print"&gt;   ... &lt;/section&gt;
+&lt;section data-name="Posters"  data-tag="print"&gt;   ... &lt;/section&gt;</code></pre>
+            <p class="small">The title slide and this chapter have <code>data-tag="keep"</code> instead, which leaves them out of the filters. They are shown whatever you include.</p>
+          </section>
+          <section class="center">
+            <h4>The config</h4>
+            <p class="small">Nothing. Tags and names are in the markup, and <code>mode</code> is already <code>"select"</code> by default, so this deck configures nothing at all.</p>
+            <p class="small">The one thing you would add is a group, which is next.</p>
+          </section>
+          <section class="center">
+            <h4>Try it</h4>
+            <ul>
+              <li><a href="?t=web">?t=web</a> — the websites only</li>
+              <li><a href="?t=print">?t=print</a> — two chapters share that tag</li>
+              <li><a href="?t=web,print">?t=web,print</a> — either one</li>
+              <li><a href="?n=identity">?n=identity</a> — by name instead</li>
+              <li><a href="demo-select.html">demo-select.html</a> — everything again</li>
+            </ul>
+          </section>
+          <section>
+            <h4>A group</h4>
+            <p class="small">A group is a set of tags and/or names under one word, so the link can be short and you can change what it means later.</p>
+            <pre><code class="hljs js" data-line-numbers="3-5">tagteam: {
+    groups: {
+        pitch: {
+            tags: ["branding", "web"]
+        }
+    }
+}</code></pre>
+            <p class="small"><a href="?g=pitch">?g=pitch</a> shows the identity work and the websites.</p>
+          </section>
+          <section class="center">
+            <h4>Unhide, the other way round</h4>
+            <p class="small">Selecting makes the parameter <em>be</em> the presentation, so everything it should be able to hide has to be marked.</p>
+            <p class="small">Unhiding is the opposite: only the extras are marked, and a parameter reveals them without touching anything else. See the <a href="demo-unhide.html">unhide demo</a>.</p>
+          </section>
+        </section>
+        <section class="center" data-tag="keep" data-state="hide-menubar">
+          <p>Go to the <a href="demo.html">main demo</a></p>
+        </section>
+      </div>
+    </div>
+    <script src="dist/reveal.js"></script>
+    <script src="dist/plugin/highlight.js"></script>
+    <script src="plugin/simplemenu/simplemenu.js"></script>
+    <script src="plugin/tagteam/tagteam.js"></script>
+    <script>
+      Reveal.initialize({
+      	transition: "slide",
+      	history: true,
+      	plugins: [ Tagteam, Simplemenu, RevealHighlight ],
+      	simplemenu: {
+      		selectby: "data-name"
+      	},
+      	tagteam: {
+      		groups: {
+      			pitch: {
+      				tags: ["branding", "web"]
+      			}
+      		}
+      	}
+      });
+    </script>
+    <script>
+      (() => {
+      	const example = document.querySelector("#exampleParameter");
+      	if (!example) return;
+      	const search = window.location.search;
+      	example.textContent = search
+      		? `.../demo-select.html${search}`
+      		: ".../demo-select.html";
+      })();
+    </script>
+  </body>
+</html>
